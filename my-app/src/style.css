@@ -1,0 +1,219 @@
+.navbar {
+    background-color: #9EB23B;
+    padding: 1.5% 0;
+}
+
+.navbar-nav{
+    width: 100%;
+}
+
+.navbar-nav li {
+    display: table-cell;
+}
+
+.nav-link-container{
+    width: 20%;
+}
+
+.nav-link {
+    color: white;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+}
+
+.nav-link:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+.nav-link:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+.nav-link:hover {
+    color: #fff;
+}
+
+.nav-link:visited:hover:active {
+    color: #fff !important;
+}
+
+@media (min-width: 1070px) {
+    .dropdown:hover>.dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-menu,
+.dropdown-menu a {
+    background-color: #9EB23B;
+    color: white;
+}
+
+.dropdown-menu li {
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown-menu li:hover,
+.dropdown-menu a:hover {
+    color: #9EB23B;
+    background-color: white;
+}
+
+.home-container {
+    height: 100vh;
+    width: 95%;
+}
+
+.kitchen-container {
+    margin-top: 5%
+}
+
+.home-text {
+    text-align: center;
+}
+
+.home-text h1 {
+    font-size: 64px;
+}
+
+.active-step {
+    color: #9EB23B;
+    font-weight: 800;
+}
+
+.formDiv {
+    width: 70vh;
+    height: 40vh;
+    margin: 0 auto;
+}
+
+.addFoodForm {
+    margin: 50px auto;
+    width: 70vh;
+    height: 40vh;
+    background-color: #f8f8f8;
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 8px;
+    text-align: left;
+    padding: 2.5% 9%;
+}
+
+.addFoodForm p {
+    margin-top: 4%;
+}
+
+.settingsImgKitchen, .settingsImgKitchen:hover {
+    position: relative;
+    left: 98%;
+    top: 1%;
+    cursor: pointer;
+}
+
+.formBtn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    top: 10%;
+}
+
+.formBtn button,
+.formBtn button:hover,
+.formBtn button:active {
+    background: none;
+    border: 2px solid #9EB23B !important;
+    color: #9EB23B !important;
+}
+
+
+.steps {
+    width: 50%;
+    position: relative;
+    left: 3%;
+}
+
+.steps button,
+.steps button:hover,
+.steps button:active {
+    color: #fff !important;
+    background-color: #9EB23B !important;
+    border: 2px solid #9EB23B !important;
+}
+
+.steps button:nth-child(2) {
+    position: relative;
+    left: 4%;
+}
+
+.fridge-container{
+    margin-top: 3%;
+}
+
+.settingsImgFridge:hover{
+    cursor: pointer;
+}
+
+.searchAndFilters{
+    width: 20%;
+}
+
+.search{
+    border: solid 1px rgb(209, 209, 209);
+}
+
+.searchInput{
+    margin-left: -1%;
+}
+
+
+.fridge-search-btn,
+.fridge-search-btn:hover,
+.fridge-search-btn:active {
+    background: none;
+    border: 2px solid #9EB23B !important;
+    color: #9EB23B !important;
+    padding: 0.1% 0.5%;
+}
+
+.food-cards{
+    margin-top: 2%;
+}
+
+.foodImg{
+    width: 180px;
+    height: 170px;
+}
+
+.foodText{
+    text-transform: capitalize;
+    margin-top: 2%;
+}
+
+.card{
+    border: 1px solid rgb(202, 202, 202);
+    background-color: #f8f8f8;
+    border-radius: 8px;
+}
+
+.myRecipesTitle{
+    color: #9EB23B;
+    font-size: 56px;
+}
+
