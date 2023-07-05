@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 
 export const Navbar = () => {
@@ -12,15 +13,35 @@ export const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav nav-pills nav-justified">
                         <li className="nav-item">
-                            <a className="nav-link" href="/">HOME</a>
-                        </li>
+                            <NavLink className="nav-link" to='/'
+                                style={({ isActive }) => {
+                                    return {
+                                        fontWeight: isActive ? "bold" : "",
+                                        backgroundColor: isActive ? '#9EB23B' : '',
+                                        color: isActive ? 'white' : ''
+                                    };
+                                }}>HOME</NavLink>                        </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="kitchen">KITCHEN</a>
-                            
+                            <NavLink className="nav-link" to='/kitchen'
+                                style={({ isActive }) => {
+                                    return {
+                                        fontWeight: isActive ? "bold" : "",
+                                        backgroundColor: isActive ? '#9EB23B' : '',
+                                        color: isActive ? 'white' : ''
+                                    };
+                                }}>KITCHEN</NavLink>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="/fridge" role="button"
-                                aria-expanded="false">FRIDGE</a>
+                            <NavLink className="nav-link dropdown-toggle" to='/fridge'
+                                role="button"
+                                aria-expanded="false"
+                                style={({ isActive }) => {
+                                    return {
+                                        fontWeight: isActive ? "bold" : "",
+                                        backgroundColor: isActive ? '#9EB23B' : '',
+                                        color: isActive ? 'white' : ''
+                                    };
+                                }}>FRIDGE</NavLink>
                             <ul className="dropdown-menu">
                                 <li><a className="dropdown-item" href="#">All</a></li><br />
                                 <li><a className="dropdown-item" href="#">Fruits</a></li><br />
@@ -32,8 +53,14 @@ export const Navbar = () => {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/my-recipes">MY RECIPES</a>
-                        </li>
+                            <NavLink className="nav-link" to='/my-recipes'
+                                style={({ isActive }) => {
+                                    return {
+                                        fontWeight: isActive ? "bold" : "",
+                                        backgroundColor: isActive ? '#9EB23B' : '',
+                                        color: isActive ? 'white' : ''
+                                    };
+                                }}>MY RECIPES</NavLink>                        </li>
                     </ul>
                 </div>
             </div>

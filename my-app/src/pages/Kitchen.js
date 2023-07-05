@@ -18,9 +18,9 @@ export const Kitchen = () =>{
         <div className="formDiv">
             <form className="addFoodForm" action="/kitchen" method="post">
                 <img className="settingsImgKitchen" src={settingsImg} alt="filters-img" width="35px" height="35px"/>
-                <p><span style="font-weight: bold;">main course:</span> ciso</p>
-                <p><span style="font-weight: bold;">second course:</span> ciso</p>
-                <p><span style="font-weight: bold;">side dish:</span> ciso</p>
+                <p><span style={{fontWeight: 'bold'}}>main course:</span> ciso</p>
+                <p><span style={{fontWeight: 'bold'}}>second course:</span> ciso</p>
+                <p><span style={{fontWeight: 'bold'}}>side dish:</span> ciso</p>
                 <div className="formBtn">
                     <button type="submit" className="btn">GENERATE</button>
                 </div>

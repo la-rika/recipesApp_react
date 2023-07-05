@@ -1,22 +1,23 @@
 import React from "react";
+import apple from "../images/food/fruit-apple.png"
 
 export const Fridge = () => {
 
     const allFoodImg = [
-        'images/food/fruit-apple.png',
-        'images/food/fruit-apricot.png',
-        'images/food/fruit-cherry.png',
-        'images/food/fruit-grape.png',
-        'images/food/fruit-orange.png',
-        'images/food/fruit-pear.png',
-        'images/food/fruit-strawberry.png',
-        'images/food/fruit-watermelon.png',
-        'images/food/veggie-carrot.png',
-        'images/food/veggie-corn.png',
-        'images/food/veggie-eggPlant.png',
-        'images/food/veggie-lettuce.png',
-        'images/food/veggie-mushroom.png',
-        'images/food/veggie-zucchini.png'
+        apple,
+        // 'images/food/fruit-apricot.png',
+        // 'images/food/fruit-cherry.png',
+        // 'images/food/fruit-grape.png',
+        // 'images/food/fruit-orange.png',
+        // 'images/food/fruit-pear.png',
+        // 'images/food/fruit-strawberry.png',
+        // 'images/food/fruit-watermelon.png',
+        // 'images/food/veggie-carrot.png',
+        // 'images/food/veggie-corn.png',
+        // 'images/food/veggie-eggPlant.png',
+        // 'images/food/veggie-lettuce.png',
+        // 'images/food/veggie-mushroom.png',
+        // 'images/food/veggie-zucchini.png'
     ]
 
     const foodTitles = []
@@ -24,6 +25,7 @@ export const Fridge = () => {
         const fileName = food.split('-');
         const foodName = fileName[1].split('.png')
         foodTitles.push(foodName[0])
+        console.log(foodName)
     })
 
     return (
@@ -39,9 +41,9 @@ export const Fridge = () => {
             <div className="row food-cards gy-5">
                 {allFoodImg.forEach(food => {
                     <div className="col-lg-2 mb-5 text-center">
-                        <img src="<%= food %>" class="card-img-top foodImg" alt="..." />
+                        <img src={food} class="card-img-top foodImg" alt="..." />
                         <div className="card-body">
-                        {/* mappare i dati  */}
+                            {foodTitles.map((item) => item.includes(food))}
                         </div>
                     </div>
                 })}
