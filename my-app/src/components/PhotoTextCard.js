@@ -1,13 +1,13 @@
 import React from "react";
 
-export const PhotoTextCard = ({photo,text }) => {
+export const PhotoTextCard = ({ photo, text }) => {
     return (
-        <div className="row food-cards gy-5">
-            <div className="col-lg-2 mb-5 text-center">
-                <img  src={photo} className="card-img-top foodImg" alt="..." />
-                <div className="card-body">
-                    {text}
-                </div>
+
+        <div className="col-lg-2 mb-5 text-center">
+            <img src={photo} className="card-img-top foodImg" alt="..." />
+            <div className="card-body">
+                {text}
             </div>
-        </div>)
+        </div>
+    )
 }

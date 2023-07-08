@@ -6,7 +6,7 @@ export const HomePage = () => {
         <div className="container">
             <div className="row home-container d-flex align-items-center">
                 <div className="col-5">
-                    <img src={images.saladLogo} alt="logo-img" width="400px" height="400px" />
+                    <img src={images[0].saladLogo} alt="logo-img" width="400px" height="400px" />
                 </div>
                 <div className="col-7 home-text">
                     <h1>About us</h1>

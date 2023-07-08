@@ -6,17 +6,25 @@ import { SearchInput } from "../components/SearchInput";
 export const Fridge = () => {
     return (
         <div className="container fridge-container ">
-
             <SearchInput
                 filtered={true} />
 
-            {images[1].fruit.forEach((item)=>{
-                console.log('ciao')
-            })}
-
-            <PhotoTextCard
-                photo={images[1].fruit[0].src}
-                text={'item'} />
+            <div className="row food-cards gy-5">
+                {images[1].fruit.map((item) => {
+                    return (
+                        <PhotoTextCard
+                            photo={item.src}
+                            text={item.name} />
+                    )
+                })}
+                {images[1].veggie.map((item) => {
+                    return (
+                        <PhotoTextCard
+                            photo={item.src}
+                            text={item.name} />
+                    )
+                })}
+            </div>
 
         </div>
     )
