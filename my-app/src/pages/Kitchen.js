@@ -7,14 +7,16 @@ export const Kitchen = () => {
     const [mainCourse, setMaincourse] = useState([]);
     const [secondCourse, setSecondCourse] = useState([]);
     const [sideDish, seSIdeDish] = useState('');
+    let courseCount = 0;
     const allFood = [];
 
-    useEffect(()=>{
-        //for each item in images lo metto dentro allFood e poi lo uso per prendere un elemento random
-    },[])
-
-    //prendere elemento random da array instruzioni:
-    // var item = items[Math.floor(Math.random()*items.length)];
+    useEffect(() => {
+        if (allFood.length === 0) {
+            images[1].fruit.concat(images[1].veggie).forEach((item) => {
+                allFood.push(item.name)
+            })
+        }
+    })
 
     return (
         <div className="container kitchen-container text-center">
@@ -32,7 +34,7 @@ export const Kitchen = () => {
                 }
 
                 {activeStep === 2 ? (
-                    <div className="col" style={{ fontWeight: 'bold' , color: '#9EB23B'}}>
+                    <div className="col" style={{ fontWeight: 'bold', color: '#9EB23B' }}>
                         Second course
                     </div>
                 ) : (
@@ -43,7 +45,7 @@ export const Kitchen = () => {
                 }
 
                 {activeStep === 3 ? (
-                    <div className="col" style={{ fontWeight: 'bold' , color: '#9EB23B'}}>
+                    <div className="col" style={{ fontWeight: 'bold', color: '#9EB23B' }}>
                         Side dish
                     </div>
                 ) : (
@@ -58,21 +60,27 @@ export const Kitchen = () => {
             <div className="formDiv">
                 <form className="addFoodForm" action="/kitchen" method="post">
                     <img className="settingsImgKitchen" src={settingsImg} alt="filters-img" width="35px" height="35px" />
-                    <p><span style={{ fontWeight: 'bold' }}>main course:</span> ciso</p>
-                    <p><span style={{ fontWeight: 'bold' }}>second course:</span> ciso</p>
-                    <p><span style={{ fontWeight: 'bold' }}>side dish:</span> ciso</p>
+                    <p><span style={{ fontWeight: 'bold' }}>main course:</span>{mainCourse}</p>
+                    <p><span style={{ fontWeight: 'bold' }}>second course:</span> {secondCourse}</p>
+                    <p><span style={{ fontWeight: 'bold' }}>side dish:</span> {sideDish} </p>
                     <div className="formBtn">
-                        <button type="submit" className="btn">GENERATE</button>
+                        <button type="button" className="btn"
+                            onClick={() => {
+                                if (mainCourse.length < 3) {
+                                    let course = allFood[Math.floor(Math.random() * allFood.length)];
+                                    setMaincourse(mainCourse => [...mainCourse, ' ' + course + ' , '])
+                                }
+                            }} disabled={courseCount > 3 ? true : false}>GENERATE</button>
                     </div>
                 </form>
                 <div className="steps row ">
                     <button type="button" className="btn  col-6"
                         disabled={activeStep === 1 ? true : false}
-                        onClick={() => setActiveStep(activeStep - 1)}>Previous step</button>
+                        onClick={() => { setActiveStep(activeStep - 1); courseCount-- }}>Previous step</button>
 
                     <button type="button" className="btn  col-6 "
-                        disabled={activeStep === 3 ? true : false}
-                        onClick={() => setActiveStep(activeStep + 1)}>Next step</button>
+                        disabled={activeStep === 3 || activeStep === 2 && secondCourse.length < 1 || activeStep === 1 && mainCourse.length < 1 ? true : false}
+                        onClick={() => { setActiveStep(activeStep + 1); courseCount++ }}>Next step</button>
                 </div>
             </div>
 
