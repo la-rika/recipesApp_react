@@ -6,7 +6,7 @@ export const Kitchen = () => {
     const [activeStep, setActiveStep] = useState(1);
     const [mainCourse, setMaincourse] = useState([]);
     const [secondCourse, setSecondCourse] = useState([]);
-    const [sideDish, seSIdeDish] = useState('');
+    const [sideDish, setSideDish] = useState('');
     let courseCount = 0;
     const allFood = [];
 
@@ -17,6 +17,16 @@ export const Kitchen = () => {
             })
         }
     })
+
+    const onGenerate = (currentCourse) =>{
+        if (currentCourse.length < 3) {
+            let course = allFood[Math.floor(Math.random() * allFood.length)];
+            {currentCourse === mainCourse &&  setMaincourse(currentCourse => [...mainCourse, ' ' + course ])}
+            {currentCourse === secondCourse &&  setSecondCourse(currentCourse => [...secondCourse, ' ' + course ])}
+            {currentCourse === sideDish &&  setSideDish(currentCourse => [...sideDish, ' ' + course ])}
+        }
+    }
+    
 
     return (
         <div className="container kitchen-container text-center">
@@ -60,17 +70,13 @@ export const Kitchen = () => {
             <div className="formDiv">
                 <form className="addFoodForm" action="/kitchen" method="post">
                     <img className="settingsImgKitchen" src={settingsImg} alt="filters-img" width="35px" height="35px" />
-                    <p><span style={{ fontWeight: 'bold' }}>main course:</span>{mainCourse}</p>
+                    <p><span style={{ fontWeight: 'bold' }}>main course:</span>{mainCourse} </p>
                     <p><span style={{ fontWeight: 'bold' }}>second course:</span> {secondCourse}</p>
                     <p><span style={{ fontWeight: 'bold' }}>side dish:</span> {sideDish} </p>
                     <div className="formBtn">
                         <button type="button" className="btn"
-                            onClick={() => {
-                                if (mainCourse.length < 3) {
-                                    let course = allFood[Math.floor(Math.random() * allFood.length)];
-                                    setMaincourse(mainCourse => [...mainCourse, ' ' + course + ' , '])
-                                }
-                            }} disabled={courseCount > 3 ? true : false}>GENERATE</button>
+                            onClick={() => {onGenerate(activeStep === 1 ? mainCourse : activeStep===2 ? secondCourse : sideDish)}}
+                            disabled={mainCourse.length  === 3 || secondCourse.length  ===3 || sideDish.length ===3}>GENERATE</button>
                     </div>
                 </form>
                 <div className="steps row ">

@@ -2,6 +2,7 @@ const images = [
     {
         saladLogo: require('./images/salad.png'),
         settingsIcon: require('./images/settings.png'),
+        binIcon: require('./images/binIcon.png')
     },
     {
         fruit: [
