@@ -7,7 +7,6 @@ export const Kitchen = () => {
     const [mainCourse, setMaincourse] = useState([]);
     const [secondCourse, setSecondCourse] = useState([]);
     const [sideDish, setSideDish] = useState('');
-    let courseCount = 0;
     const allFood = [];
 
     useEffect(() => {
@@ -18,15 +17,31 @@ export const Kitchen = () => {
         }
     })
 
-    const onGenerate = (currentCourse) =>{
+    const onGenerate = (currentCourse) => {
         if (currentCourse.length < 3) {
             let course = allFood[Math.floor(Math.random() * allFood.length)];
-            {currentCourse === mainCourse &&  setMaincourse(currentCourse => [...mainCourse, ' ' + course ])}
-            {currentCourse === secondCourse &&  setSecondCourse(currentCourse => [...secondCourse, ' ' + course ])}
-            {currentCourse === sideDish &&  setSideDish(currentCourse => [...sideDish, ' ' + course ])}
+
+            {currentCourse === mainCourse && setMaincourse([...mainCourse, course])}
+            {currentCourse === secondCourse && setSecondCourse([...secondCourse, course])}
+            {currentCourse === sideDish && setSideDish(course)}
         }
     }
-    
+
+    const onComplete = (mainCourse,secondCourse,sideDish) =>{
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = today.getMonth()+1;
+        const dd = today.getDate();
+        const date = yyyy+'/'+mm+'/'+dd;
+
+        const payload ={
+            mainCourse: mainCourse,
+            secondCourse: secondCourse,
+            sideDish: sideDish,
+            date: date
+        }
+        console.log(payload)
+    }
 
     return (
         <div className="container kitchen-container text-center">
@@ -70,23 +85,25 @@ export const Kitchen = () => {
             <div className="formDiv">
                 <form className="addFoodForm" action="/kitchen" method="post">
                     <img className="settingsImgKitchen" src={settingsImg} alt="filters-img" width="35px" height="35px" />
-                    <p><span style={{ fontWeight: 'bold' }}>main course:</span>{mainCourse} </p>
-                    <p><span style={{ fontWeight: 'bold' }}>second course:</span> {secondCourse}</p>
-                    <p><span style={{ fontWeight: 'bold' }}>side dish:</span> {sideDish} </p>
+                    <p><span style={{ fontWeight: 'bold' }}>main course (max 3):</span>{mainCourse.map((item) => ' ' + item + ', ')} </p>
+                    <p><span style={{ fontWeight: 'bold' }}>second course (max 3):</span> {secondCourse.map((item) => ' ' + item + ', ')} </p>
+                    <p><span style={{ fontWeight: 'bold' }}>side dish (max 1):</span> {sideDish} </p>
                     <div className="formBtn">
                         <button type="button" className="btn"
-                            onClick={() => {onGenerate(activeStep === 1 ? mainCourse : activeStep===2 ? secondCourse : sideDish)}}
-                            disabled={mainCourse.length  === 3 || secondCourse.length  ===3 || sideDish.length ===3}>GENERATE</button>
+                            onClick={() => { onGenerate(activeStep === 1 ? mainCourse : activeStep === 2 ? secondCourse : sideDish) }}
+                            disabled={mainCourse.length === 3 && activeStep === 1 ||
+                                secondCourse.length === 3 && activeStep === 2 ||
+                                sideDish !== '' && activeStep === 3}>GENERATE</button>
                     </div>
                 </form>
                 <div className="steps row ">
                     <button type="button" className="btn  col-6"
-                        disabled={activeStep === 1 ? true : false}
-                        onClick={() => { setActiveStep(activeStep - 1); courseCount-- }}>Previous step</button>
+                        disabled={activeStep === 1}
+                        onClick={() => { setActiveStep(activeStep - 1)}}>Previous step</button>
 
                     <button type="button" className="btn  col-6 "
-                        disabled={activeStep === 3 || activeStep === 2 && secondCourse.length < 1 || activeStep === 1 && mainCourse.length < 1 ? true : false}
-                        onClick={() => { setActiveStep(activeStep + 1); courseCount++ }}>Next step</button>
+                        disabled={activeStep === 3 && mainCourse.length===0 && secondCourse.length===0 && sideDish===''}
+                        onClick={() => {activeStep !== 3 ? setActiveStep(activeStep + 1) : onComplete(mainCourse,secondCourse,sideDish)}}>{activeStep===3 ? 'Complete' : 'Next step'}</button>
                 </div>
             </div>
 
