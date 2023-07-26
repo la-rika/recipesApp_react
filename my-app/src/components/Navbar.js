@@ -43,7 +43,7 @@ export const Navbar = () => {
                                     };
                                 }}>FRIDGE</NavLink>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">All</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge">All</a></li><br />
                                 <li><a className="dropdown-item" href="#">Fruits</a></li><br />
                                 <li><a className="dropdown-item" href="#">Vegetables</a></li><br />
                                 <li><a className="dropdown-item" href="#">Meat</a></li><br />
