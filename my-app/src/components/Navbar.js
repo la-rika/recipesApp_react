@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import {useSelector, useDispatch } from "react-redux";
+import { dropDownFilterAdd } from "../redux/slices/filters";
 
 export const Navbar = () => {
+
+    const dispatch = useDispatch()
+
     return (
         <nav className="navbar sticky-top navbar-expand-lg ">
             <div className="container-fluid">
@@ -44,12 +48,12 @@ export const Navbar = () => {
                                 }}>FRIDGE</NavLink>
                             <ul className="dropdown-menu">
                                 <li><a className="dropdown-item" href="/fridge">All</a></li><br />
-                                <li><a className="dropdown-item" href="#">Fruits</a></li><br />
-                                <li><a className="dropdown-item" href="#">Vegetables</a></li><br />
-                                <li><a className="dropdown-item" href="#">Meat</a></li><br />
-                                <li><a className="dropdown-item" href="#">Bread</a></li><br />
-                                <li><a className="dropdown-item" href="#">Pasta and Rice</a></li><br />
-                                <li><a className="dropdown-item" href="#">Legumes</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={()=>dispatch(dropDownFilterAdd())} >Fruits</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" >Vegetables</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge">Meat</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge">Bread</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge">Pasta and Rice</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge">Legumes</a></li><br />
                             </ul>
                         </li>
                         <li className="nav-item">
