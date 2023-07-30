@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import {useSelector, useDispatch } from "react-redux";
-import { dropDownFilterAdd } from "../redux/slices/filters";
+import { useDispatch, useSelector } from "react-redux";
+import { dropDownFilterAdd } from "../redux/reducers/filters";
+
 
 export const Navbar = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    // const dropDownFilter = useSelector(state => state.filters.dropDownFilter)
+    // const [item, setItem] = useState('');
+
+    // useEffect(() => {
+    //     localStorage.setItem('dropDownFilter', JSON.stringify('fruit'));
+    //     console.log(item)
+    // }, [dropDownFilter]);
 
     return (
         <nav className="navbar sticky-top navbar-expand-lg ">
@@ -48,7 +56,7 @@ export const Navbar = () => {
                                 }}>FRIDGE</NavLink>
                             <ul className="dropdown-menu">
                                 <li><a className="dropdown-item" href="/fridge">All</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge" onClick={()=>dispatch(dropDownFilterAdd())} >Fruits</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge">Fruits</a></li><br />
                                 <li><a className="dropdown-item" href="/fridge" >Vegetables</a></li><br />
                                 <li><a className="dropdown-item" href="/fridge">Meat</a></li><br />
                                 <li><a className="dropdown-item" href="/fridge">Bread</a></li><br />

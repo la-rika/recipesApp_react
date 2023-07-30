@@ -11,8 +11,9 @@ export const Kitchen = () => {
 
     useEffect(() => {
         if (allFood.length === 0) {
-            images[1].fruit.concat(images[1].veggie).forEach((item) => {
-                allFood.push(item.name)
+            images.forEach((item, index) => {
+                index !== 0 &&
+                    allFood.push(item.name)
             })
         }
     })
@@ -21,20 +22,20 @@ export const Kitchen = () => {
         if (currentCourse.length < 3) {
             let course = allFood[Math.floor(Math.random() * allFood.length)];
 
-            {currentCourse === mainCourse && setMaincourse([...mainCourse, course])}
-            {currentCourse === secondCourse && setSecondCourse([...secondCourse, course])}
-            {currentCourse === sideDish && setSideDish(course)}
+            { currentCourse === mainCourse && setMaincourse([...mainCourse, course]) }
+            { currentCourse === secondCourse && setSecondCourse([...secondCourse, course]) }
+            { currentCourse === sideDish && setSideDish(course) }
         }
     }
 
-    const onComplete = (mainCourse,secondCourse,sideDish) =>{
+    const onComplete = (mainCourse, secondCourse, sideDish) => {
         const today = new Date();
         const yyyy = today.getFullYear();
-        const mm = today.getMonth()+1;
+        const mm = today.getMonth() + 1;
         const dd = today.getDate();
-        const date = yyyy+'/'+mm+'/'+dd;
+        const date = yyyy + '/' + mm + '/' + dd;
 
-        const payload ={
+        const payload = {
             mainCourse: mainCourse,
             secondCourse: secondCourse,
             sideDish: sideDish,
@@ -99,11 +100,11 @@ export const Kitchen = () => {
                 <div className="steps row ">
                     <button type="button" className="btn  col-6"
                         disabled={activeStep === 1}
-                        onClick={() => { setActiveStep(activeStep - 1)}}>Previous step</button>
+                        onClick={() => { setActiveStep(activeStep - 1) }}>Previous step</button>
 
                     <button type="button" className="btn  col-6 "
-                        disabled={activeStep === 3 && mainCourse.length===0 && secondCourse.length===0 && sideDish===''}
-                        onClick={() => {activeStep !== 3 ? setActiveStep(activeStep + 1) : onComplete(mainCourse,secondCourse,sideDish)}}>{activeStep===3 ? 'Complete' : 'Next step'}</button>
+                        disabled={activeStep === 3 && mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
+                        onClick={() => { activeStep !== 3 ? setActiveStep(activeStep + 1) : onComplete(mainCourse, secondCourse, sideDish) }}>{activeStep === 3 ? 'Complete' : 'Next step'}</button>
                 </div>
             </div>
 
