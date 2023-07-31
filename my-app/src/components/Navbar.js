@@ -7,15 +7,46 @@ import { dropDownFilterAdd } from "../redux/reducers/filters";
 export const Navbar = () => {
 
     const dispatch = useDispatch();
-    const dropDownFilter = useSelector(state => state.filters.dropDownFilter)
-    const [item, setItem] = useState('');
 
-    useEffect(() => {
-        setItem(dropDownFilter)
-        localStorage.setItem('dropDownFilter', JSON.stringify(dropDownFilter));
-        console.log(item)
-    }, [dropDownFilter]);
-        
+    const handleDropDown = (event) => {
+        let filterName = '';
+        switch (event.target.innerHTML) {
+            case 'Fruits': {
+                filterName = 'fruit';
+                break;
+            }
+            case 'Vegetables': {
+                filterName = 'veggie';
+                break;
+            }
+            case 'Meat': {
+                filterName = 'fruit';
+                break;
+            }
+            case 'Bread': {
+                filterName = 'fruit';
+                break;
+            }
+            case 'Pasta': {
+                filterName = 'fruit';
+                break;
+            }
+            case 'Rice': {
+                filterName = 'rice';
+                break;
+            }
+            case 'Legumes': {
+                filterName = 'fruit';
+                break;
+            }
+
+            default:
+                break;
+        }
+        dispatch(dropDownFilterAdd(filterName))
+        event.preventDefault()
+    }
+
     return (
         <nav className="navbar sticky-top navbar-expand-lg ">
             <div className="container-fluid">
@@ -57,12 +88,13 @@ export const Navbar = () => {
                                 }}>FRIDGE</NavLink>
                             <ul className="dropdown-menu">
                                 <li><a className="dropdown-item" href="/fridge">All</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge" onClick={()=>dispatch(dropDownFilterAdd('fruit'))}>Fruits</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge" >Vegetables</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge">Meat</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge">Bread</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge">Pasta and Rice</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge">Legumes</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={(e) => handleDropDown(e)} >Fruits</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={(e) => handleDropDown(e)} >Vegetables</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={(e) => handleDropDown(e)} >Meat</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={(e) => handleDropDown(e)} >Bread</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={(e) => handleDropDown(e)} >Pasta</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={(e) => handleDropDown(e)} >Rice</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={(e) => handleDropDown(e)} >Legumes</a></li><br />
                             </ul>
                         </li>
                         <li className="nav-item">
@@ -77,8 +109,6 @@ export const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            {dropDownFilter!==''&&
-                <p>ciao</p>}
         </nav>
     )
 }
