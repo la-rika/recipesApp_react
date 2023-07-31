@@ -7,14 +7,15 @@ import { dropDownFilterAdd } from "../redux/reducers/filters";
 export const Navbar = () => {
 
     const dispatch = useDispatch();
-    // const dropDownFilter = useSelector(state => state.filters.dropDownFilter)
-    // const [item, setItem] = useState('');
+    const dropDownFilter = useSelector(state => state.filters.dropDownFilter)
+    const [item, setItem] = useState('');
 
-    // useEffect(() => {
-    //     localStorage.setItem('dropDownFilter', JSON.stringify('fruit'));
-    //     console.log(item)
-    // }, [dropDownFilter]);
-
+    useEffect(() => {
+        setItem(dropDownFilter)
+        localStorage.setItem('dropDownFilter', JSON.stringify(dropDownFilter));
+        console.log(item)
+    }, [dropDownFilter]);
+        
     return (
         <nav className="navbar sticky-top navbar-expand-lg ">
             <div className="container-fluid">
@@ -56,7 +57,7 @@ export const Navbar = () => {
                                 }}>FRIDGE</NavLink>
                             <ul className="dropdown-menu">
                                 <li><a className="dropdown-item" href="/fridge">All</a></li><br />
-                                <li><a className="dropdown-item" href="/fridge">Fruits</a></li><br />
+                                <li><a className="dropdown-item" href="/fridge" onClick={()=>dispatch(dropDownFilterAdd('fruit'))}>Fruits</a></li><br />
                                 <li><a className="dropdown-item" href="/fridge" >Vegetables</a></li><br />
                                 <li><a className="dropdown-item" href="/fridge">Meat</a></li><br />
                                 <li><a className="dropdown-item" href="/fridge">Bread</a></li><br />
@@ -76,6 +77,8 @@ export const Navbar = () => {
                     </ul>
                 </div>
             </div>
+            {dropDownFilter!==''&&
+                <p>ciao</p>}
         </nav>
     )
 }

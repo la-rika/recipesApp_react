@@ -53,7 +53,7 @@ button:disabled {
     color: #fff !important;
 }
 
-@media (min-width: 1070px) {
+@media (min-width: 920px) {
     .dropdown:hover>.dropdown-menu {
         display: block;
         margin-top: 0;

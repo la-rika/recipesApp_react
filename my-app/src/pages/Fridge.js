@@ -3,37 +3,29 @@ import images from "../indexImg";
 import { PhotoTextCard } from "../components/PhotoTextCard";
 import { SearchInput } from "../components/SearchInput";
 import { useSelector, useDispatch } from "react-redux";
-import { increase } from "../redux/reducers/filters";
+import { dropDownFilterAdd, increase } from "../redux/reducers/filters";
 export const Fridge = () => {
 
-    // const [item, setItem] = useState('');
+    const [item, setItem] = useState('');
 
-    // useEffect(() => {
-    //     const items = JSON.parse(localStorage.getItem('dropDownFilter'));
-    //     if (items) {
-    //         setItem(items);
-    //         console.log(items)
-    //     }
-    // }, []);
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('dropDownFilter'));
+        if (items) {
+            setItem(items);
+            console.log(items)
+        }
+    }, []);
 
-    const dispatch = useDispatch()
-    const item = useSelector((state)=> state.filters.dropDownFilter)
 
     return (
         <div className="container fridge-container ">
             <SearchInput
                 filtered={true} />
 
-                {/* <div>
-                    <button onClick={dispatch(increase())}>+</button>
-                    <p>{count}</p>
-                </div> */}
-                <p>{item}</p>
-
             <div className="row food-cards gy-5">
-                {/* {item ?
+                {item ?
                     images.map((elem, index) => {
-                        if (index !== 0 && elem.src.includes('fruit')) {
+                        if (index !== 0 && elem.src.includes(item)) {
                             return (
                                 <PhotoTextCard photo={elem.src} text={elem.name} key={index} />
                             )
@@ -46,7 +38,7 @@ export const Fridge = () => {
                                 <PhotoTextCard photo={elem.src} text={elem.name} />
                             )
                         }
-                    })} */}
+                    })}
             </div>
 
         </div>
