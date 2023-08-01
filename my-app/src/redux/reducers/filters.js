@@ -10,9 +10,12 @@ export const filtersSlice = createSlice({
     reducers:{
         dropDownFilterAdd: (state,action) =>{
             state.dropDownFilter = action.payload
+        },
+        dropDownFilterReset: (state) =>{
+            state.dropDownFilter = ''
         }
     }
 })
 
-export const {dropDownFilterAdd} = filtersSlice.actions;
+export const {dropDownFilterAdd, dropDownFilterReset} = filtersSlice.actions;
 export default filtersSlice.reducer;

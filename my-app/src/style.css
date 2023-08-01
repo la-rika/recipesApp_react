@@ -53,34 +53,6 @@ button:disabled {
     color: #fff !important;
 }
 
-@media (min-width: 920px) {
-    .dropdown:hover>.dropdown-menu {
-        display: block;
-        margin-top: 0;
-    }
-}
-
-.dropdown-toggle::after {
-    content: none;
-}
-
-.dropdown-menu,
-.dropdown-menu a {
-    background-color: #9EB23B;
-    color: white;
-}
-
-.dropdown-menu li {
-    display: flex;
-    justify-content: center;
-}
-
-.dropdown-menu li:hover,
-.dropdown-menu a:hover {
-    color: #9EB23B;
-    background-color: white;
-}
-
 .home-container {
     height: 100vh;
     width: 95%;
@@ -215,6 +187,19 @@ button:disabled {
     border: 1px solid rgb(202, 202, 202);
     background-color: #f8f8f8;
     border-radius: 8px;
+}
+
+.filterButton{
+    width: 10%;
+    background: none;
+    border: 2px solid #9EB23B !important;
+    color: #9EB23B !important;
+}
+
+.filterButton:hover{
+    background: #9EB23B !important;;
+    border: 2px solid white !important;
+    color: white !important;
 }
 
 .myRecipesTitle{
