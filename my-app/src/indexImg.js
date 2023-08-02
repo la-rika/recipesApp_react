@@ -60,6 +60,66 @@ const images = [
         name: 'zucchini',
         src: require('./images/food/veggie-zucchini.png')
     },
+    {
+        name: 'cow meat',
+        src: require('./images/food/meat-cow.png')
+    },
+    {
+        name: 'chicken meat',
+        src: require('./images/food/meat-chicken.png')
+    },
+    {
+        name: 'goat meat',
+        src: require('./images/food/meat-goat.png')
+    },
+    {
+        name: 'horse meat',
+        src: require('./images/food/meat-horse.png')
+    },
+    {
+        name: 'salmon',
+        src: require('./images/food/fish-salmon.png')
+    },
+    {
+        name: 'tuna',
+        src: require('./images/food/fish-tuna.png')
+    },
+    {
+        name: 'fresh pasta',
+        src: require('./images/food/pasta-rice-fresh.png')
+    },
+    {
+        name: 'whole-wheat pasta',
+        src: require('./images/food/pasta-rice-wholeWheat.png')
+    },
+    {
+        name: 'rice',
+        src: require('./images/food/pasta-rice-rice.png')
+    },
+    {
+        name: 'bread',
+        src: require('./images/food/bread-bread.png')
+    },
+    {
+        name: 'cheekpeaks',
+        src: require('./images/food/legs-cheekpeaks.png')
+    },
+    {
+        name: 'edamame',
+        src: require('./images/food/legs-edamame.png')
+    },
+    {
+        name: 'beans',
+        src: require('./images/food/legs-beans.png')
+    },
+    {
+        name: 'lentils',
+        src: require('./images/food/legs-lentils.png')
+    },
+    {
+        name: 'peas',
+        src: require('./images/food/legs-peas.png')
+    },
 ]
 
 export default images;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import images from "../indexImg";
-import { SearchInput,PhotoTextCard, FiltersButtons } from "../components";
+import {PhotoTextCard, FiltersButtons } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { dropDownFilterAdd, dropDownFilterReset } from "../redux/reducers/filters";
 
@@ -28,23 +28,19 @@ export const Fridge = () => {
                 break;
             }
             case 'Meat': {
-                filterName = 'fruit';
+                filterName = 'meat';
                 break;
             }
             case 'Bread': {
-                filterName = 'fruit';
+                filterName = 'bread';
                 break;
             }
-            case 'Pasta': {
-                filterName = 'fruit';
-                break;
-            }
-            case 'Rice': {
-                filterName = 'rice';
+            case 'Pasta and Rice': {
+                filterName = 'pasta-rice';
                 break;
             }
             case 'Legumes': {
-                filterName = 'fruit';
+                filterName = 'legs';
                 break;
             }
             case 'Fish': {
@@ -53,6 +49,7 @@ export const Fridge = () => {
             }
 
             default:
+                filterName = ''
                 break;
         }
         dispatch(dropDownFilterAdd(filterName))
@@ -60,7 +57,7 @@ export const Fridge = () => {
 
     return (
         <div className="container fridge-container ">
-            <FiltersButtons onClick={(e) => handleFilter(e)}/>
+            <FiltersButtons onClick={(e) => handleFilter(e)} filter={dropDownFilter}/>
             <div className="row food-cards gy-5">
                 {dropDownFilter ?
                     images.map((elem, index) => {

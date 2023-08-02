@@ -4,7 +4,7 @@ const initialState ={
     dropDownFilter:''
 }
 
-export const filtersSlice = createSlice({
+const filtersSlice = createSlice({
     name: 'filters',
     initialState,
     reducers:{

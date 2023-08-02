@@ -190,13 +190,19 @@ button:disabled {
 }
 
 .filterButton{
-    width: 10%;
+    width: 11%;
     background: none;
     border: 2px solid #9EB23B !important;
     color: #9EB23B !important;
 }
 
 .filterButton:hover{
+    background: #9EB23B !important;;
+    border: 2px solid white !important;
+    color: white !important;
+}
+
+#activeButton{
     background: #9EB23B !important;;
     border: 2px solid white !important;
     color: white !important;

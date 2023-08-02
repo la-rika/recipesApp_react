@@ -1,30 +1,49 @@
 import React, { useEffect, useState } from "react";
 import settingsImg from "../images/settings.png"
 import images from "../indexImg";
+import { useSelector, useDispatch } from "react-redux";
+import { mainCourseAdd, secondCourseAdd, sideDishAdd } from "../redux/reducers/kitchen";
 
 export const Kitchen = () => {
+
+    const dispatch = useDispatch();
+    const mainCourse = useSelector((state) => state.kitchen.mainCourse)
+    const secondCourse = useSelector((state) => state.kitchen.secondCourse)
+    const sideDish = useSelector((state) => state.kitchen.sideDish)
+
+
     const [activeStep, setActiveStep] = useState(1);
-    const [mainCourse, setMaincourse] = useState([]);
-    const [secondCourse, setSecondCourse] = useState([]);
-    const [sideDish, setSideDish] = useState('');
-    const allFood = [];
+    const [mainFood, setMainFood] = useState([])
+    const [secondFood, setSecondFood] = useState([])
+    const [sideOnly, setSideOnly] = useState([])
+    let mf = []
+    let sf = []
+    let so = []
 
     useEffect(() => {
-        if (allFood.length === 0) {
+        if (mainFood.length === 0 && sideOnly.length === 0) {
             images.forEach((item, index) => {
-                index !== 0 &&
-                    allFood.push(item.name)
+                if (index !== 0)
+                    if (item.src.includes('pasta-rice') || item.src.includes('veggie'))
+                        mf.push(item.name)
+                    else if (!item.src.includes('pasta-rice') || !item.src.includes('fruit'))
+                        sf.push(item.name)
+                    else
+                        so.push(item.name)
             })
+            setMainFood(mf);
+            setSideOnly(so)
         }
-    })
+    }, [])
 
     const onGenerate = (currentCourse) => {
         if (currentCourse.length < 3) {
-            let course = allFood[Math.floor(Math.random() * allFood.length)];
+            let course = mainFood[Math.floor(Math.random() * mainFood.length)];
+            let sideCourse = sideOnly[Math.floor(Math.random() * sideOnly.length)];
 
-            { currentCourse === mainCourse && setMaincourse([...mainCourse, course]) }
-            { currentCourse === secondCourse && setSecondCourse([...secondCourse, course]) }
-            { currentCourse === sideDish && setSideDish(course) }
+            { currentCourse === mainCourse && dispatch(mainCourseAdd(course)) }
+            { currentCourse === secondCourse && dispatch(secondCourseAdd(course)) }
+            { currentCourse === sideDish && dispatch(sideDishAdd(sideCourse)) }
         }
     }
 
@@ -43,6 +62,7 @@ export const Kitchen = () => {
         }
         console.log(payload)
     }
+
 
     return (
         <div className="container kitchen-container text-center">
