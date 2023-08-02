@@ -13,37 +13,26 @@ export const Kitchen = () => {
 
 
     const [activeStep, setActiveStep] = useState(1);
-    const [mainFood, setMainFood] = useState([])
-    const [secondFood, setSecondFood] = useState([])
-    const [sideOnly, setSideOnly] = useState([])
-    let mf = []
-    let sf = []
-    let so = []
+    const [allFood, setAllFood] = useState([])
+    let allf = []
 
     useEffect(() => {
-        if (mainFood.length === 0 && sideOnly.length === 0) {
+        if (allFood.length===0) {
             images.forEach((item, index) => {
                 if (index !== 0)
-                    if (item.src.includes('pasta-rice') || item.src.includes('veggie'))
-                        mf.push(item.name)
-                    else if (!item.src.includes('pasta-rice') || !item.src.includes('fruit'))
-                        sf.push(item.name)
-                    else
-                        so.push(item.name)
+                    allf.push(item.name)
             })
-            setMainFood(mf);
-            setSideOnly(so)
+            setAllFood(allf)
         }
     }, [])
 
     const onGenerate = (currentCourse) => {
         if (currentCourse.length < 3) {
-            let course = mainFood[Math.floor(Math.random() * mainFood.length)];
-            let sideCourse = sideOnly[Math.floor(Math.random() * sideOnly.length)];
+            let course = allFood[Math.floor(Math.random() * allFood.length)];
 
-            { currentCourse === mainCourse && dispatch(mainCourseAdd(course)) }
-            { currentCourse === secondCourse && dispatch(secondCourseAdd(course)) }
-            { currentCourse === sideDish && dispatch(sideDishAdd(sideCourse)) }
+            { currentCourse === mainCourse && !mainCourse.includes(course) && dispatch(mainCourseAdd(course)) }
+            { currentCourse === secondCourse && !currentCourse.includes(course) && dispatch(secondCourseAdd(course)) }
+            { currentCourse === sideDish && !currentCourse.includes(course) && dispatch(sideDishAdd(course)) }
         }
     }
 
