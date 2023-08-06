@@ -1,26 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    mainCourse:[],
-    secondCourse:[],
-    sideDish:''
+    newCourse:{
+        mainCourse:[],
+        secondCourse:[],
+        sideDish:'',
+        creationDate:''
+    }
 }
 
 const kitchenSlice = createSlice({
     name: 'kitchen',
     initialState,
     reducers:{
-        mainCourseAdd :(state,action)=>{
-            state.mainCourse.push(action.payload);
-        },
-        secondCourseAdd :(state,action)=>{
-            state.secondCourse.push(action.payload);
-        },
-        sideDishAdd :(state,action)=>{
-            state.sideDish = action.payload;
+        newCourseAdd: (state,action)=>{
+            state.newCourse = action.payload
         }
     }
 })
 
-export const {mainCourseAdd, secondCourseAdd,sideDishAdd} = kitchenSlice.actions;
+export const {newCourseAdd} = kitchenSlice.actions;
 export default kitchenSlice.reducer;

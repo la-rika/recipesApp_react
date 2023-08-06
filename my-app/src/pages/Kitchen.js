@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import settingsImg from "../images/settings.png"
 import images from "../indexImg";
 import { useSelector, useDispatch } from "react-redux";
-import { mainCourseAdd, secondCourseAdd, sideDishAdd } from "../redux/reducers/kitchen";
+import { mainCourseAdd, newCourseAdd, secondCourseAdd, sideDishAdd } from "../redux/reducers/kitchen";
 
 export const Kitchen = () => {
 
     const dispatch = useDispatch();
-    const mainCourse = useSelector((state) => state.kitchen.mainCourse)
-    const secondCourse = useSelector((state) => state.kitchen.secondCourse)
-    const sideDish = useSelector((state) => state.kitchen.sideDish)
+    const [mainCourse,setMainCourse] = useState([])
+    const [secondCourse, setSecondCourse] = useState([])
+    const [sideDish,setSideDish] = useState('')
 
 
     const [activeStep, setActiveStep] = useState(1);
@@ -30,9 +30,9 @@ export const Kitchen = () => {
         if (currentCourse.length < 3) {
             let course = allFood[Math.floor(Math.random() * allFood.length)];
 
-            { currentCourse === mainCourse && !mainCourse.includes(course) && dispatch(mainCourseAdd(course)) }
-            { currentCourse === secondCourse && !currentCourse.includes(course) && dispatch(secondCourseAdd(course)) }
-            { currentCourse === sideDish && !currentCourse.includes(course) && dispatch(sideDishAdd(course)) }
+            { currentCourse === mainCourse && setMainCourse([...mainCourse, course])}
+            { currentCourse === secondCourse && setSecondCourse([...secondCourse,course])}
+            { currentCourse === sideDish && setSideDish(course)}
         }
     }
 
@@ -44,13 +44,15 @@ export const Kitchen = () => {
         const date = yyyy + '/' + mm + '/' + dd;
 
         const payload = {
-            mainCourse: mainCourse,
-            secondCourse: secondCourse,
-            sideDish: sideDish,
-            date: date
+                mainCourse: mainCourse,
+                secondCourse: secondCourse,
+                sideDish: sideDish,
+                creationDate: date
         }
-        console.log(payload)
+
+        dispatch(newCourseAdd(payload))
     }
+    console.log(useSelector((state)=> state.kitchen.newCourse))
 
 
     return (
