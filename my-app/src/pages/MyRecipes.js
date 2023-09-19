@@ -1,14 +1,8 @@
-import React, { useEffect } from "react";
-import axios from 'axios';
-
+import React from "react";
 
 
 export const MyRecipes = () => {
-    useEffect(()=>{
-        axios.get('http://localhost:5000/')
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    },[])
+
     return (
         <div className="container fridge-container">
             <h1 className="myRecipesTitle">My recipes  </h1>
