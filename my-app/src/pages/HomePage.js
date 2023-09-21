@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import images from "../indexImg";
+import axios from 'axios'
 
 export const HomePage = () => {
     return (

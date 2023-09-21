@@ -11,6 +11,7 @@ export const Kitchen = () => {
     const [secondCourse, setSecondCourse] = useState([])
     const [sideDish,setSideDish] = useState('')
 
+    const [newCourse,setNewCourse]=useState()
 
     const [activeStep, setActiveStep] = useState(1);
     const [allFood, setAllFood] = useState([])
@@ -52,7 +53,7 @@ export const Kitchen = () => {
 
         dispatch(newCourseAdd(payload))
     }
-    console.log(useSelector((state)=> state.kitchen.newCourse))
+    // console.log(useSelector((state)=> state.kitchen.newCourse))
 
 
     return (
