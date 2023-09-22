@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import settingsImg from "../images/settings.png"
 import images from "../indexImg";
-import { useSelector, useDispatch } from "react-redux";
-import { mainCourseAdd, newCourseAdd, secondCourseAdd, sideDishAdd } from "../redux/reducers/kitchen";
+import axios from "axios";
 
 export const Kitchen = () => {
 
-    const dispatch = useDispatch();
     const [mainCourse,setMainCourse] = useState([])
     const [secondCourse, setSecondCourse] = useState([])
     const [sideDish,setSideDish] = useState('')
-
-    const [newCourse,setNewCourse]=useState()
-
     const [activeStep, setActiveStep] = useState(1);
     const [allFood, setAllFood] = useState([])
     let allf = []
+
+
+    const axiosAddData =  async(data) => {
+        await axios.post('http://localhost:3001/kitchen',data)
+        .then(res=>console.log(res.data))
+        .catch(err=>{console.log(err)})
+
+    }
 
     useEffect(() => {
         if (allFood.length===0) {
@@ -51,7 +54,7 @@ export const Kitchen = () => {
                 creationDate: date
         }
 
-        dispatch(newCourseAdd(payload))
+        axiosAddData(payload)
     }
     // console.log(useSelector((state)=> state.kitchen.newCourse))
 
@@ -114,9 +117,10 @@ export const Kitchen = () => {
                         disabled={activeStep === 1}
                         onClick={() => { setActiveStep(activeStep - 1) }}>Previous step</button>
 
-                    <button type="button" className="btn  col-6 "
+                    <button type="submit" className="btn  col-6 "
                         disabled={activeStep === 3 && mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
-                        onClick={() => { activeStep !== 3 ? setActiveStep(activeStep + 1) : onComplete(mainCourse, secondCourse, sideDish) }}>{activeStep === 3 ? 'Complete' : 'Next step'}</button>
+                        onClick={() => { activeStep !== 3 && setActiveStep(activeStep + 1) }}
+                        onSubmit={activeStep===3&&onComplete(mainCourse, secondCourse, sideDish) }>{activeStep === 3 ? 'Complete' : 'Next step'}</button>
                 </div>
             </div>
 

@@ -3,6 +3,7 @@ import images from "../indexImg";
 import axios from 'axios'
 
 export const HomePage = () => {
+
     return (
         <div className="container">
             <div className="row home-container d-flex align-items-center">
