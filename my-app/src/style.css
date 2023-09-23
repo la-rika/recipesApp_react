@@ -187,6 +187,9 @@ button:disabled {
     border: 1px solid rgb(202, 202, 202);
     background-color: #f8f8f8;
     border-radius: 8px;
+    margin-right: 20px;
+    width: fit-content;
+    min-width: 20%;
 }
 
 .filterButton{

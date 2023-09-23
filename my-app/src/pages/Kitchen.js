@@ -5,23 +5,23 @@ import axios from "axios";
 
 export const Kitchen = () => {
 
-    const [mainCourse,setMainCourse] = useState([])
+    const [mainCourse, setMainCourse] = useState([])
     const [secondCourse, setSecondCourse] = useState([])
-    const [sideDish,setSideDish] = useState('')
+    const [sideDish, setSideDish] = useState('')
     const [activeStep, setActiveStep] = useState(1);
     const [allFood, setAllFood] = useState([])
     let allf = []
 
-
-    const axiosAddData =  async(data) => {
-        await axios.post('http://localhost:3001/kitchen',data)
-        .then(res=>console.log(res.data))
-        .catch(err=>{console.log(err)})
+    //post request with axios
+    const axiosAddData = (data) => {
+        axios.post('http://localhost:3001/kitchen', data)//quando fare la chiamata(dove) e cosa mandare
+            .then(res => console.log(res.data))
+            .catch(err => { console.log(err) })
 
     }
 
     useEffect(() => {
-        if (allFood.length===0) {
+        if (allFood.length === 0) {
             images.forEach((item, index) => {
                 if (index !== 0)
                     allf.push(item.name)
@@ -34,9 +34,9 @@ export const Kitchen = () => {
         if (currentCourse.length < 3) {
             let course = allFood[Math.floor(Math.random() * allFood.length)];
 
-            { currentCourse === mainCourse && setMainCourse([...mainCourse, course])}
-            { currentCourse === secondCourse && setSecondCourse([...secondCourse,course])}
-            { currentCourse === sideDish && setSideDish(course)}
+            { currentCourse === mainCourse && setMainCourse([...mainCourse, course]) }
+            { currentCourse === secondCourse && setSecondCourse([...secondCourse, course]) }
+            { currentCourse === sideDish && setSideDish(course) }
         }
     }
 
@@ -48,10 +48,10 @@ export const Kitchen = () => {
         const date = yyyy + '/' + mm + '/' + dd;
 
         const payload = {
-                mainCourse: mainCourse,
-                secondCourse: secondCourse,
-                sideDish: sideDish,
-                creationDate: date
+            mainCourse: mainCourse,
+            secondCourse: secondCourse,
+            sideDish: sideDish,
+            creationDate: date
         }
 
         axiosAddData(payload)
@@ -117,12 +117,25 @@ export const Kitchen = () => {
                         disabled={activeStep === 1}
                         onClick={() => { setActiveStep(activeStep - 1) }}>Previous step</button>
 
-                    <button type="submit" className="btn  col-6 "
-                        disabled={activeStep === 3 && mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
-                        onClick={() => { activeStep !== 3 && setActiveStep(activeStep + 1) }}
-                        onSubmit={activeStep===3&&onComplete(mainCourse, secondCourse, sideDish) }>{activeStep === 3 ? 'Complete' : 'Next step'}</button>
+                    {activeStep !== 3 ? (
+                        <button type="submit" className="btn  col-6 "
+                            disabled={mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
+                            onClick={() => { setActiveStep(activeStep + 1) }}>Next step</button>
+                    ) : (
+                        <button type="submit" className="btn  col-6 "
+                            disabled={activeStep === 3 && mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
+                            onClick={() => onComplete(mainCourse, secondCourse, sideDish)}>Complete</button>
+                    )}
                 </div>
             </div>
+            {/* snippet della modale, da aggiungere anche js da bootstrap */}
+            {/* <div class="modal-body">
+                <h2 class="fs-5">Popover in a modal</h2>
+                <p>This <button class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">button</button> triggers a popover on click.</p>
+                <hr>
+                    <h2 class="fs-5">Tooltips in a modal</h2>
+                    <p><a href="#" data-bs-toggle="tooltip" title="Tooltip">This link</a> and <a href="#" data-bs-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
+            </div> */}
 
         </div>
 
