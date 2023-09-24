@@ -14,7 +14,7 @@ export const MyRecipes = () => {
     return (
         <div className="container fridge-container">
             <h1 className="myRecipesTitle">My recipes  </h1>
-            <div className="row food-cards d-flex ">
+            <div className="food-cards d-flex justify-content-between">
                 {allRecipes.map((el, index) => {
                     return (
                         <div className="col-2 card " key={index}>
@@ -25,7 +25,7 @@ export const MyRecipes = () => {
                                 <p>{el.secondCourse.map((item, index) => { return (index === el.secondCourse.length - 1 ? item + ';' : item + ', ') })}</p>
                                 <b>side dish</b>
                                 <p>{el.sideDish}</p>
-                                <p className="card-text" style={{ color: 'rgb(163, 163, 163' }}>{el.creationDate.split('T')[0]}</p>
+                                <p className="card-text" style={{ color: 'rgb(163, 163, 163', position:'absolute', bottom:'20px'}}>{el.creationDate.split('T')[0]}</p>
                             </div>
                         </div>
                     )

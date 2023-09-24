@@ -23,20 +23,43 @@ export const Kitchen = () => {
     useEffect(() => {
         if (allFood.length === 0) {
             images.forEach((item, index) => {
-                if (index !== 0)
+                if (index !== 0){
                     allf.push(item.name)
+                }
             })
             setAllFood(allf)
         }
-    }, [])
+    })
 
     const onGenerate = (currentCourse) => {
         if (currentCourse.length < 3) {
+            //fare un find di un cibo che contiene le parole chiave per ogni portata e fare un random solo su quelli che corrispondono
             let course = allFood[Math.floor(Math.random() * allFood.length)];
-
-            { currentCourse === mainCourse && setMainCourse([...mainCourse, course]) }
-            { currentCourse === secondCourse && setSecondCourse([...secondCourse, course]) }
-            { currentCourse === sideDish && setSideDish(course) }
+            switch (currentCourse) {
+                case mainCourse: {
+                    course.includes('pasta') ||
+                    course.includes('rice') &&
+                    setMainCourse([...mainCourse, course]);
+                    break;
+                }
+                case secondCourse: {
+                    course.includes('meat') ||
+                    course.includes('veggie') ||
+                    course.includes('legs') ||
+                    course.includes('bread') ||
+                    course.includes('fish') &&
+                    setSecondCourse([...secondCourse, course]);
+                    break;
+                }
+                case sideDish: {
+                    course.includes('fruit') ||
+                    course.includes('veggie') &&
+                    setSideDish(course)
+                }
+                default:{
+                    break;
+                }
+            }
         }
     }
 
