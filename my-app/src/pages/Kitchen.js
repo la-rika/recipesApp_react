@@ -23,7 +23,7 @@ export const Kitchen = () => {
     useEffect(() => {
         if (allFood.length === 0) {
             images.forEach((item, index) => {
-                if (index !== 0){
+                if (index !== 0) {
                     allf.push(item.name)
                 }
             })
@@ -34,29 +34,37 @@ export const Kitchen = () => {
     const onGenerate = (currentCourse) => {
         if (currentCourse.length < 3) {
             //fare un find di un cibo che contiene le parole chiave per ogni portata e fare un random solo su quelli che corrispondono
-            let course = allFood[Math.floor(Math.random() * allFood.length)];
+            let course;
+            let filteredCourse = [];
             switch (currentCourse) {
                 case mainCourse: {
-                    course.includes('pasta') ||
-                    course.includes('rice') &&
+                    allFood.forEach(item => {
+                        if (filteredCourse.length === 0) {
+                            if (item.includes('pasta') || item.includes('rice')) {
+                                filteredCourse.push(item);
+                                course = filteredCourse[Math.floor(Math.random() * filteredCourse.length)];
+                                console.log(filteredCourse)
+                            }
+                        }
+                    })
                     setMainCourse([...mainCourse, course]);
                     break;
                 }
                 case secondCourse: {
                     course.includes('meat') ||
-                    course.includes('veggie') ||
-                    course.includes('legs') ||
-                    course.includes('bread') ||
-                    course.includes('fish') &&
-                    setSecondCourse([...secondCourse, course]);
+                        course.includes('veggie') ||
+                        course.includes('legs') ||
+                        course.includes('bread') ||
+                        course.includes('fish') &&
+                        setSecondCourse([...secondCourse, course]);
                     break;
                 }
                 case sideDish: {
                     course.includes('fruit') ||
-                    course.includes('veggie') &&
-                    setSideDish(course)
+                        course.includes('veggie') &&
+                        setSideDish(course)
                 }
-                default:{
+                default: {
                     break;
                 }
             }
