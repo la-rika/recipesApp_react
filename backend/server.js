@@ -18,7 +18,7 @@ const recipesSchema = new mongoose.Schema({
     mainCourse: Array,
     secondCourse: Array,
     sideDish: Array,
-    creationDate: Date
+    creationDate: String
 })
 
 const Recipe = new mongoose.model('recipe', recipesSchema);

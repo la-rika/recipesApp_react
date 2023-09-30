@@ -21,48 +21,31 @@ export const Kitchen = () => {
     }
 
     useEffect(() => {
-        if (allFood.length === 0) {
             images.forEach((item, index) => {
                 if (index !== 0) {
                     allf.push(item.name)
                 }
             })
             setAllFood(allf)
-        }
-    })
+    },[])
 
     const onGenerate = (currentCourse) => {
         if (currentCourse.length < 3) {
             //fare un find di un cibo che contiene le parole chiave per ogni portata e fare un random solo su quelli che corrispondono
-            let course;
-            let filteredCourse = [];
+            let course =  allFood[Math.floor(Math.random() * allFood.length)]
+
             switch (currentCourse) {
                 case mainCourse: {
-                    allFood.forEach(item => {
-                        if (filteredCourse.length === 0) {
-                            if (item.includes('pasta') || item.includes('rice')) {
-                                filteredCourse.push(item);
-                                course = filteredCourse[Math.floor(Math.random() * filteredCourse.length)];
-                                console.log(filteredCourse)
-                            }
-                        }
-                    })
                     setMainCourse([...mainCourse, course]);
                     break;
                 }
                 case secondCourse: {
-                    course.includes('meat') ||
-                        course.includes('veggie') ||
-                        course.includes('legs') ||
-                        course.includes('bread') ||
-                        course.includes('fish') &&
                         setSecondCourse([...secondCourse, course]);
-                    break;
+                        break;
                 }
                 case sideDish: {
-                    course.includes('fruit') ||
-                        course.includes('veggie') &&
-                        setSideDish(course)
+                    setSideDish(course);
+                    break;
                 }
                 default: {
                     break;
@@ -72,17 +55,13 @@ export const Kitchen = () => {
     }
 
     const onComplete = (mainCourse, secondCourse, sideDish) => {
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = today.getMonth() + 1;
-        const dd = today.getDate();
-        const date = yyyy + '/' + mm + '/' + dd;
+        let currentDate = new Date().toJSON().slice(0, 10);
 
         const payload = {
             mainCourse: mainCourse,
             secondCourse: secondCourse,
             sideDish: sideDish,
-            creationDate: date
+            creationDate: currentDate
         }
 
         axiosAddData(payload)
