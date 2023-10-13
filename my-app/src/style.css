@@ -222,3 +222,20 @@ button:disabled {
     font-size: 56px;
 }
 
+.modal-button:nth-child(1){
+    background-color: #9EB23B !important;
+    color: #fff;
+}
+
+.modal-button:nth-child(2){
+    background-color: #fff !important;
+    border: 2px solid #9EB23B;
+    color: #9EB23B;
+}
+
+.modal-button{
+    margin-right: 20px;
+    width:15%;
+}
+
+

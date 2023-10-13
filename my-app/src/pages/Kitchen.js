@@ -21,18 +21,18 @@ export const Kitchen = () => {
     }
 
     useEffect(() => {
-            images.forEach((item, index) => {
-                if (index !== 0) {
-                    allf.push(item.name)
-                }
-            })
-            setAllFood(allf)
-    },[])
+        images.forEach((item, index) => {
+            if (index !== 0) {
+                allf.push(item.name)
+            }
+        })
+        setAllFood(allf)
+    }, [])
 
     const onGenerate = (currentCourse) => {
         if (currentCourse.length < 3) {
             //fare un find di un cibo che contiene le parole chiave per ogni portata e fare un random solo su quelli che corrispondono
-            let course =  allFood[Math.floor(Math.random() * allFood.length)]
+            let course = allFood[Math.floor(Math.random() * allFood.length)]
 
             switch (currentCourse) {
                 case mainCourse: {
@@ -40,8 +40,8 @@ export const Kitchen = () => {
                     break;
                 }
                 case secondCourse: {
-                        setSecondCourse([...secondCourse, course]);
-                        break;
+                    setSecondCourse([...secondCourse, course]);
+                    break;
                 }
                 case sideDish: {
                     setSideDish(course);
@@ -72,7 +72,6 @@ export const Kitchen = () => {
     return (
         <div className="container kitchen-container text-center">
             <div className="row">
-
                 {activeStep === 1 ? (
                     <div className="col" style={{ fontWeight: 'bold', color: '#9EB23B' }}>
                         Main course
@@ -132,21 +131,30 @@ export const Kitchen = () => {
                             disabled={mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
                             onClick={() => { setActiveStep(activeStep + 1) }}>Next step</button>
                     ) : (
-                        <button type="submit" className="btn  col-6 "
+                        <button type="submit" className="btn  col-6" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                             disabled={activeStep === 3 && mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
                             onClick={() => onComplete(mainCourse, secondCourse, sideDish)}>Complete</button>
                     )}
                 </div>
             </div>
-            {/* snippet della modale, da aggiungere anche js da bootstrap */}
-            {/* <div class="modal-body">
-                <h2 class="fs-5">Popover in a modal</h2>
-                <p>This <button class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">button</button> triggers a popover on click.</p>
-                <hr>
-                    <h2 class="fs-5">Tooltips in a modal</h2>
-                    <p><a href="#" data-bs-toggle="tooltip" title="Tooltip">This link</a> and <a href="#" data-bs-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
-            </div> */}
-
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="staticBackdropLabel" style={{marginLeft:'15px'}}>Recipe successfully saved !</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" style={{width:'0px', height:'0px',marginRight:'15px'}} 
+                            onClick={()=>window.location.reload()}></button>
+                        </div>
+                        <div className="modal-body">
+                            Click <b>STAY</b> to create another recipe or <b>LEAVE</b> to see all the recipes that you created.
+                        </div>
+                        <div className="modal-footer">
+                            <button  type="button" className="btn modal-button" data-bs-dismiss="modal" onClick={()=>window.location.reload()}>STAY</button>
+                            <button  type="button" className="btn modal-button" onClick={()=> window.location.replace('/my-recipes')}>LEAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     )
