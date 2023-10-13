@@ -14,10 +14,10 @@ export const MyRecipes = () => {
     return (
         <div className="container fridge-container">
             <h1 className="myRecipesTitle">My recipes  </h1>
-            <div className="food-cards d-flex justify-content-between">
+            <div className="food-cards d-flex ">
                 {allRecipes.map((el, index) => {
                     return (
-                        <div className="col-2 card " key={index}>
+                        <div className=" card " key={index}>
                             <div className="card-body" style={{ padding: '10%' }}>
                                 <b>main course</b>
                                 <p>{el.mainCourse.map((item, index) => { return (index === el.mainCourse.length - 1 ? item + ';' : item + ', ') })}</p>
