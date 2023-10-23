@@ -2,7 +2,7 @@ import React from "react";
 
 export const FiltersButtons = ({onClick, filter}) => {
     return (
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between flex-wrap">
             <button type="button" className="btn filterButton" id={filter === '' && 'activeButton'} onClick={onClick}>All</button>
             <button type="button" className="btn filterButton" id={filter === 'fruit' && 'activeButton'} onClick={onClick}>Fruits</button>
             <button type="button" className="btn filterButton" id={filter === 'veggie' && 'activeButton'} onClick={onClick}>Vegetables</button>
@@ -11,6 +11,8 @@ export const FiltersButtons = ({onClick, filter}) => {
             <button type="button" className="btn filterButton" id={filter === 'pasta' || filter === 'rice' && 'activeButton'} onClick={onClick}>Pasta and Rice</button>
             <button type="button" className="btn filterButton" id={filter === 'legs' && 'activeButton'} onClick={onClick}>Legumes</button>
             <button type="button" className="btn filterButton" id={filter === 'bread' && 'activeButton'} onClick={onClick}>Bread</button>
+            <button type="button" className="btn filterButton" id={filter === 'dairy' && 'activeButton'} onClick={onClick}>Eggs and Dairy products</button>
+            <button type="button" className="btn filterButton" id={filter === 'sweets' && 'activeButton'} onClick={onClick}>Sweets</button>
         </div>
     )
 }

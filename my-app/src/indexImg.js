@@ -120,6 +120,26 @@ const images = [
         name: 'peas',
         src: require('./images/food/legs-peas.png')
     },
+    {
+        name: 'cheese of your choice',
+        src: require('./images/food/dairy-cheeseOfYourChoice.png')
+    },
+    {
+        name: 'eggs',
+        src: require('./images/food/dairy-eggs.png')
+    },
+    {
+        name: 'mozzarella',
+        src: require('./images/food/dairy-mozzarella.png')
+    },
+    {
+        name: 'ricotta',
+        src: require('./images/food/dairy-ricotta.png')
+    },
+    {
+        name: 'ice cream',
+        src: require('./images/food/sweets-ice-cream.png')
+    },
 ]
 
 export default images;

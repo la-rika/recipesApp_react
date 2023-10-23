@@ -48,13 +48,24 @@ export const Fridge = () => {
                 break;
             }
 
+            case 'Sweets':{
+                filterName = 'sweets';
+                break;
+            }
+
+            case 'Eggs and Dairy products':{
+                filterName = 'dairy'
+                break;
+            }
+                
+
             default:
                 filterName = ''
                 break;
         }
+
         dispatch(dropDownFilterAdd(filterName))
     }
-
     return (
         <div className="container fridge-container ">
             <FiltersButtons onClick={(e) => handleFilter(e)} filter={dropDownFilter}/>

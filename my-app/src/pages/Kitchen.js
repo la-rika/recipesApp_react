@@ -43,10 +43,10 @@ export const Kitchen = () => {
                 if (item.src.includes('pasta-rice') || item.src.includes('veggie') && item.name !== 'lettuce' && item.name !== 'corn') {
                     mf.push(item)
                 } 
-                if (!item.src.includes('pasta-rice')&&!item.src.includes('fruit')) {
+                if (!item.src.includes('pasta-rice')&&!item.src.includes('fruit')||item.src.includes('dairy')) {
                     sf.push(item)
                 }
-                if (item.src.includes('fruit') || item.src.includes('veggie')) {
+                if (item.src.includes('fruit') || item.src.includes('veggie')||item.src.includes('ice-cream')) {
                     sideD.push(item)
                 }
             }
@@ -55,7 +55,6 @@ export const Kitchen = () => {
         setMainFood(mf)
         setSecondFood(sf);
         setSideFood(sideD)
-        console.log(sf)
     }, [])
 
     const showIngredients = (foodArray) => {
@@ -113,7 +112,6 @@ export const Kitchen = () => {
                     break;
                 }
                 case sideDish: {
-                    console.log(currentCourse,currentFood,course)
                     setSideDish(course.name);
                     break;
                 }
