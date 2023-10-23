@@ -5,16 +5,28 @@ import axios from "axios";
 
 export const Kitchen = () => {
 
+    //courses with the generated foods
     const [mainCourse, setMainCourse] = useState([])
     const [secondCourse, setSecondCourse] = useState([])
     const [sideDish, setSideDish] = useState('')
+
     const [activeStep, setActiveStep] = useState(1);
+
+    //filtered arrays base on the difference between courses
     const [allFood, setAllFood] = useState([])
     const [mainFood, setMainFood] = useState([]);
     const [secondFood, setSecondFood] = useState([]);
     const [sideFood, setSideFood] = useState([]);
-    var allf = [];
-    var mf = [];
+
+    //arrays with names only of the foods
+    const [mappingMainFood, setMappingMainFood] = useState([])
+    const [mappingSecondFood, setMappingSecondFood] = useState([])
+    
+    //helping vars
+    const allf = [];
+    const mf = [];
+    const sf = [];
+    const sideD = []
 
     //post request with axios
     const axiosAddData = (data) => {
@@ -30,49 +42,79 @@ export const Kitchen = () => {
                 allf.push(item);
                 if (item.src.includes('pasta-rice') || item.src.includes('veggie') && item.name !== 'lettuce' && item.name !== 'corn') {
                     mf.push(item)
-                    console.log()
+                } 
+                if (!item.src.includes('pasta-rice')&&!item.src.includes('fruit')) {
+                    sf.push(item)
+                }
+                if (item.src.includes('fruit') || item.src.includes('veggie')) {
+                    sideD.push(item)
                 }
             }
         })
         setAllFood(allf)
         setMainFood(mf)
+        setSecondFood(sf);
+        setSideFood(sideD)
+        console.log(sf)
     }, [])
 
-    const onGenerate = (currentCourse, currentFood) => { //TODO: ora maincourse e' un array di oggetti, sistemare il map per vedere i cibi nel form
+    const showIngredients = (foodArray) => {
+        const array = [];
+        foodArray.forEach(item => {
+            array.push(item.name)
+        })
+        if (foodArray === mainCourse) {
+            setMappingMainFood(array);
+        }else if(foodArray===secondCourse){
+            setMappingSecondFood(array)
+        }
+    }
+
+
+    const onGenerate = (currentCourse, currentFood) => {
         if (currentCourse.length < 3) {
             let course = currentFood[Math.floor(Math.random() * currentFood.length)];
-            let mc= mainCourse||[];
+            let mc = mainCourse || [];
+            let sc = secondCourse || [];
+            let sd = sideDish || ''
             switch (currentCourse) {
                 case mainCourse: {
-                    console.log(course);
-                    if(mainCourse.find(item=>item.src.includes('pasta-rice'))){
-                        if(course.src.includes('pasta-rice')){
-                            onGenerate(mainCourse,mainFood)
-                        }else{
-                            if(!mainCourse.find(item=>item === course)){
+                    if (mainCourse.find(item => item.src.includes('pasta-rice'))) {
+                        if (course.src.includes('pasta-rice')) {
+                            onGenerate(mainCourse, mainFood)
+                        } else {
+                            if (!mainCourse.find(item => item === course)) {
                                 mc.push(course)
 
-                            }else{
-                                onGenerate(mainCourse,mainFood)
+                            } else {
+                                onGenerate(mainCourse, mainFood)
                             }
                         }
-                    }else{
-                        if(course.src.includes('pasta-rice')){
+                    } else {
+                        if (course.src.includes('pasta-rice')) {
                             mc.push(course)
-                        }else{
-                            onGenerate(mainCourse,mainFood)
+                        } else {
+                            onGenerate(mainCourse, mainFood)
                         }
                     }
-                    setMainCourse(mc)
-                    console.log(mainCourse)
+                    setMainCourse(mc);
+                    showIngredients(currentCourse)
                     break;
                 }
                 case secondCourse: {
-                    setSecondCourse([...secondCourse, course]);
+                    if (!secondCourse.find(item => item === course)) {
+                        sc.push(course)
+
+                    } else {
+                        onGenerate(secondCourse, secondFood)
+                    }
+                    setSecondCourse(sc);
+                    showIngredients(currentCourse)
                     break;
                 }
                 case sideDish: {
-                    setSideDish(course);
+                    console.log(currentCourse,currentFood,course)
+                    setSideDish(course.name);
                     break;
                 }
                 default: {
@@ -94,7 +136,7 @@ export const Kitchen = () => {
 
         axiosAddData(payload)
     }
-    // console.log(useSelector((state)=> state.kitchen.newCourse))
+
 
 
     return (
@@ -137,13 +179,17 @@ export const Kitchen = () => {
             </div>
             <div className="formDiv">
                 <form className="addFoodForm" action="/kitchen" method="post">
-                    <img className="settingsImgKitchen" src={settingsImg} alt="filters-img" width="35px" height="35px" />
-                    <p><span style={{ fontWeight: 'bold' }}>main course (max 3):</span>{mainCourse.map((item) => ' ' + item.name + ', ')} </p>
-                    <p><span style={{ fontWeight: 'bold' }}>second course (max 3):</span> {secondCourse.map((item) => ' ' + item + ', ')} </p>
+                    <img className="settingsImgKitchen" src={settingsImg} alt="filters-img" width="35px" height="35px" style={{ visibility: 'hidden' }} />
+                    <p><span style={{ fontWeight: 'bold' }}>main course (max 3):</span>{ mappingMainFood.map(item => ' ' + item + ', ')}</p>
+                    <p><span style={{ fontWeight: 'bold' }}>second course (max 3):</span> { mappingSecondFood.map((item) => ' ' + item + ', ')} </p>
                     <p><span style={{ fontWeight: 'bold' }}>side dish (max 1):</span> {sideDish} </p>
                     <div className="formBtn">
                         <button type="button" className="btn"
-                            onClick={() => { if (activeStep === 1) { onGenerate(mainCourse, mainFood) } }}
+                            onClick={() => {
+                                activeStep === 1 ?
+                                    onGenerate(mainCourse, mainFood) : activeStep === 2 ?
+                                        onGenerate(secondCourse, secondFood) : onGenerate(sideDish, sideFood)
+                            }}
                             disabled={mainCourse.length === 3 && activeStep === 1 ||
                                 secondCourse.length === 3 && activeStep === 2 ||
                                 sideDish !== '' && activeStep === 3}>GENERATE</button>
@@ -152,12 +198,12 @@ export const Kitchen = () => {
                 <div className="steps row ">
                     <button type="button" className="btn  col-6"
                         disabled={activeStep === 1}
-                        onClick={() => { setActiveStep(activeStep - 1) }}>Previous step</button>
+                        onClick={() => { setActiveStep(activeStep - 1)}}>Previous step</button>
 
                     {activeStep !== 3 ? (
                         <button type="submit" className="btn  col-6 "
                             disabled={mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
-                            onClick={() => { setActiveStep(activeStep + 1) }}>Next step</button>
+                            onClick={() => { setActiveStep(activeStep + 1)}}>Next step</button>
                     ) : (
                         <button type="submit" className="btn  col-6" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                             disabled={activeStep === 3 && mainCourse.length === 0 && secondCourse.length === 0 && sideDish === ''}
