@@ -198,6 +198,20 @@ button:disabled {
     height: 280px;
 }
 
+.card-date{
+    position: absolute;
+    bottom: 28px;
+    color: rgb(178, 178, 178);
+}
+
+.bin-image, .bin-image:hover{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+
 .filterButton{
     height: 2%;
     min-width: 10%;
@@ -224,6 +238,12 @@ button:disabled {
 .myRecipesTitle{
     color: #9EB23B;
     font-size: 56px;
+}
+
+.binContainer{
+    position: relative;
+    right: 5%;
+    top: 6%;
 }
 
 .modal-button:nth-child(1){
