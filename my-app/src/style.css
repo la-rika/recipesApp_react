@@ -139,8 +139,8 @@ button:disabled {
     left: 4%;
 }
 
-.fridge-container{
-    margin-top: 3%;
+.fridge-container,.cards-container{
+    margin-top: 20px;
 }
 
 .settingsImgFridge:hover{
@@ -170,7 +170,7 @@ button:disabled {
 }
 
 .food-cards{
-    margin-top: 2%;
+    margin-top: 7px;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 2%;
@@ -198,6 +198,26 @@ button:disabled {
     height: 280px;
 }
 
+.deleAllButton{
+    margin-top:12px;
+    font-size: 14px;
+    width: fit-content;
+}
+
+.card-date{
+    position: absolute;
+    bottom: 28px;
+    color: rgb(178, 178, 178);
+}
+
+.bin-image, .bin-image:hover{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+
 .filterButton{
     height: 2%;
     min-width: 10%;
@@ -224,6 +244,12 @@ button:disabled {
 .myRecipesTitle{
     color: #9EB23B;
     font-size: 56px;
+}
+
+.binContainer{
+    position: relative;
+    right: 5%;
+    top: 6%;
 }
 
 .modal-button:nth-child(1){

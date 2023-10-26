@@ -24,10 +24,23 @@ const recipesSchema = new mongoose.Schema({
 
 const Recipe = new mongoose.model('recipe', recipesSchema);
 
+app.delete('/my-recipes/:recipeID', (req, res) => {
+    const recipeID = req.params.recipeID;
+    Recipe.deleteOne({ _id: recipeID })
+        .then(() => { console.log('recipe deleted') })
+        .catch((err) => { console.log(err) })
+})
+
 app.get('/my-recipes', (req, res) => {
     const allRecipes = [];
     Recipe.find().then(data => { res.send(data) }).catch(err => console.log(err))
 });
+
+app.delete('/my-recipes', (req,res)=>{
+    Recipe.deleteMany({})
+    .then(()=>{console.log('all recipes deleted')})
+    .catch((err)=>console.log(err))
+})
 
 //quando faccio la chiamata post in /kitchen succede questo...
 app.post('/kitchen', (req, res) => {
