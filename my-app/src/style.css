@@ -139,8 +139,8 @@ button:disabled {
     left: 4%;
 }
 
-.fridge-container{
-    margin-top: 3%;
+.fridge-container,.cards-container{
+    margin-top: 20px;
 }
 
 .settingsImgFridge:hover{
@@ -170,7 +170,7 @@ button:disabled {
 }
 
 .food-cards{
-    margin-top: 2%;
+    margin-top: 7px;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 2%;
@@ -196,6 +196,12 @@ button:disabled {
     margin-top: 25px;
     margin-right: 40px;
     height: 280px;
+}
+
+.deleAllButton{
+    margin-top:12px;
+    font-size: 14px;
+    width: fit-content;
 }
 
 .card-date{

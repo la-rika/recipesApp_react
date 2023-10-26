@@ -15,15 +15,22 @@ export const MyRecipes = () => {
     const handleDeleteOne = (recipeID) => {
         console.log(recipeID)
         axios.delete(`http://localhost:3001/my-recipes/${recipeID}`)
-            .then((response) => { console.log(response) })
+            .then((response) => { console.log('one card deleted') })
             .catch((err) => { console.log(err) })
         window.location.reload();
     }
 
+    const handleDeleteAll=()=>{
+        axios.delete(`http://localhost:3001/my-recipes`)
+        .then((response)=>{console.log('all cards deleted')})
+        .catch((err)=>{console.log(err)})
+        window.location.reload();
+    }
 
     return (
-        <div className="container fridge-container">
+        <div className="container cards-container">
             <h1 className="myRecipesTitle">My recipes  </h1>
+                <button className="deleAllButton btn  btn-outline-danger" onClick={()=>handleDeleteAll()} disabled={allRecipes.length===0}>DELETE ALL</button>
             <div className="food-cards d-flex ">
                 {allRecipes.map((el, index) => {
                     return (
