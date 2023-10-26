@@ -24,6 +24,13 @@ const recipesSchema = new mongoose.Schema({
 
 const Recipe = new mongoose.model('recipe', recipesSchema);
 
+app.delete('/my-recipes/:recipeID', (req, res) => {
+    const recipeID = req.params.recipeID;
+    Recipe.deleteOne({ _id: recipeID })
+        .then(() => { console.log('recipe deleted') })
+        .catch((err) => { console.log(err) })
+})
+
 app.get('/my-recipes', (req, res) => {
     const allRecipes = [];
     Recipe.find().then(data => { res.send(data) }).catch(err => console.log(err))

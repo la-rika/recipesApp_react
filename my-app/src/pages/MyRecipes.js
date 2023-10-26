@@ -8,9 +8,17 @@ export const MyRecipes = () => {
 
     useEffect(() => {
         axios.get('http://localhost:3001/my-recipes')
-            .then(res => { setAllRecipes(res.data); console.log(res.data) })
+            .then(res => { setAllRecipes(res.data) })
             .catch(err => { console.log(err) })
     }, [])
+
+    const handleDeleteOne = (recipeID) => {
+        console.log(recipeID)
+        axios.delete(`http://localhost:3001/my-recipes/${recipeID}`)
+            .then((response) => { console.log(response) })
+            .catch((err) => { console.log(err) })
+        window.location.reload();
+    }
 
 
     return (
@@ -21,9 +29,9 @@ export const MyRecipes = () => {
                     return (
                         <div className=" card " key={index}>
                             <div className="bin-container d-flex justify-content-end">
-                                <img className="bin-image" src={images[0].binIcon} alt="bin-icon" width="20px" height="20px" />
+                                <img className="bin-image" src={images[0].binIcon} alt="bin-icon" width="20px" height="20px" onClick={() => handleDeleteOne(el._id)} />
                             </div>
-                            <div className="card-body" style={{ padding: '10%' , paddingTop:'28px'}}>
+                            <div className="card-body" style={{ padding: '10%', paddingTop: '28px' }}>
                                 <b>main course</b>
                                 <p>{el.mainCourse.map((item, index) => { return (index === el.mainCourse.length - 1 ? item.name + ';' : item.name + ', ') })}</p>
                                 <b>second course</b>
