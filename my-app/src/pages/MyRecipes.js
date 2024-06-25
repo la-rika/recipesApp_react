@@ -26,7 +26,7 @@ export const MyRecipes = () => {
         .catch((err)=>{console.log(err)})
         window.location.reload();
     }
-
+    console.log(allRecipes)
     return (
         <div className="container cards-container">
             <h1 className="myRecipesTitle">My recipes  </h1>
@@ -40,9 +40,9 @@ export const MyRecipes = () => {
                             </div>
                             <div className="card-body" style={{ padding: '10%', paddingTop: '28px' }}>
                                 <b>main course</b>
-                                <p>{el.mainCourse.map((item, index) => { return (index === el.mainCourse.length - 1 ? item + ';' : item + ', ') })}</p>
+                                <p>{el.mainCourse.map((item, index) => { return (index === el.mainCourse.length - 1 ? item.name : item.name + ', ') })}</p>
                                 <b>second course</b>
-                                <p>{el.secondCourse.map((item, index) => { return (index === el.secondCourse.length - 1 ? item + ';' : item + ', ') })}</p>
+                                <p>{el.secondCourse.map((item, index) => { return (index === el.secondCourse.length - 1 ? item.name : item.name + ', ') })}</p>
                                 <b>side dish</b>
                                 <p>{el.sideDish}</p>
                                 <p className="card-text card-date" >{el.creationDate.split('T')[0]}</p>
