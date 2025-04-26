@@ -46,6 +46,7 @@ app.delete('/my-recipes', (req,res)=>{
 app.post('/kitchen', (req, res) => {
     const newRecipe = new Recipe(req.body);
     newRecipe.save();
+    console.log(newRecipe)
 })
 
 app.listen(3001, () => {
